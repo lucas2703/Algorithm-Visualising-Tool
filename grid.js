@@ -2,7 +2,6 @@
 
         // make start and end tiles one-click
         // implement visualisation for algorithm
-        // tempadsaada
 
         /*******************************************************************/
 
