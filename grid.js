@@ -1,7 +1,7 @@
         /**************************** TO DO ********************************/
 
-        // make start and end tiles one-click
-        // implement visualisation for algorithm
+        // make start and end tiles one-click - drag and drop into table? 
+        // implement visualisation for algorithm - step-by-step visualisation
 
         /*******************************************************************/
 
