@@ -249,7 +249,7 @@ function convertElementToRowColumn (elementId)
     return coords;
 }
 
-function dijkstraSolve() {
+async function dijkstraSolve() {
 
     // set START point in gridGraph array and finish point into its surrounding tiles 
     if (startPoint && endPoint)
@@ -409,7 +409,7 @@ function dijkstraSolve() {
     }
 
 
-    // solve the distance using dijkstra and store the path
+    // solve the distance using dijkstra.js and store the path
     var finalPath = Dijkstra(gridGraph, "start", "finish").path;
 
     // set the path (exlcuding START and END) tiles to .click to convert their colour
@@ -417,5 +417,16 @@ function dijkstraSolve() {
     {
         let routeTemp = document.getElementById(finalPath[i]);
         routeTemp.className = 'route';
+        await sleep(100);
     }
+}
+
+// shamelessly stolen off stack overflow
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function test()
+{
+    console.log("test123");
 }

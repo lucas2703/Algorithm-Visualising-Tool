@@ -108,8 +108,6 @@ const Dijkstra = (graph, startNode, finishNode) =>
         path: optimalPath
     }
 
-    console.log("got here 3333");
-
     return results;
 };
 
