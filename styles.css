@@ -63,7 +63,8 @@ a {
     width: 120px;
     transition: all 0.5s;
     cursor: pointer;
-    margin: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .solve-button span {
@@ -175,8 +176,9 @@ a {
     }
     #nav .pure-menu-heading {
         border-bottom: none;
-        font-size: 18px;
+        font-size: 20px;
         color: rgb(75, 113, 151);
+        margin-left: -10px;  
     }
 
 
@@ -189,7 +191,7 @@ a {
 
     /* Move the layout over so we can fit the nav + list in on the left */
     #layout {
-        padding-left:500px; /* "left col (nav + list)" width */
+        padding-left: 500px; /* "left col (nav + list)" width */
         position: relative;
     }
 
@@ -202,7 +204,7 @@ a {
     }
     #nav {
         margin-left:-500px; /* "left col (nav + list)" width */
-        width:150px;
+        width:150px; /* width of left-hand navigation panel */
         height: 100%;
     }
 

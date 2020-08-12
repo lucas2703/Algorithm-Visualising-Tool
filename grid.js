@@ -412,7 +412,7 @@ async function dijkstraSolve() {
     // solve the distance using dijkstra.js and store the path
     var finalPath = Dijkstra(gridGraph, "start", "finish").path;
 
-    console.log(finalPath); 
+    console.log(finalPath);
 
     // set the path (exlcuding START and END) tiles to .click to convert their colour
     for (let i = 1; i < finalPath.length - 1; i++)
