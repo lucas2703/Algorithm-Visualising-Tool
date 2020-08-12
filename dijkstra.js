@@ -30,7 +30,7 @@ const shortestNodeDistance = (distances, visited) => {
     return shortest;
 };
 
-const Dijkstra = (graph, startNode, finishNode) => 
+const Dijkstra = (graph, startNode, finishNode) =>
 {
     // Hash object to track each nodes DISTANCES from start node
     var distances = {};
@@ -59,6 +59,15 @@ const Dijkstra = (graph, startNode, finishNode) =>
         let distanceToNode = distances[nearestNode];
         // child of nearestNode
         let childrenOfNode = graph[nearestNode];
+
+        /* Visualisation purposes */
+        //console.log(convertElementToRowColumn(nearestNode));
+        /*if (document.getElementById(nearestNode).className != 'start')
+        {
+            let solvingBlock = document.getElementById(nearestNode);
+            //solvingBlock.className = 'solving';
+            await sleep(20);
+        }*/
 
         // make sure the child node is not startNode
         for (let child in childrenOfNode)
@@ -92,7 +101,7 @@ const Dijkstra = (graph, startNode, finishNode) =>
         nearestNode = shortestNodeDistance(distances, visitedNodes);
     }
 
-    // record shortest path by traversing through the route object and reversing the array
+    // record shortest path by traversing through the route object and reversing the array (so it goes from start to finish)
     var optimalPath = [finishNode];
     var parentNode = route[finishNode];
     while (parentNode)
