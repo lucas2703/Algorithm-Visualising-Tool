@@ -421,14 +421,11 @@ async function dijkstraSolve() {
         routeTemp.className = 'route';
         await sleep(100);
     }
+
+    console.log(selectedAlgorithm);
 }
 
 // shamelessly stolen off stack overflow
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function test()
-{
-    console.log("test123");
 }

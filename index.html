@@ -11,7 +11,7 @@
 
 <body>
 
-<div id="layout" class="layout1">
+<div id="layout" class="navigation"> 
     <script src = "nav_menu.js"></script>
     <div id="nav" class="nav_bar">
         <a href="#" class="nav-menu-button">Menu</a>
@@ -19,24 +19,28 @@
             <div class="pure-menu">
                 <ul class="pure-menu-list">
                     <li class="pure-menu-heading">Algorithms</li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Dijkstra's</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="test();">A*</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Temp1</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Temp2</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Temp3</a></li>
-                    <li class="pure-menu-heading">Temp</li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="email-label-personal"></span>Temp1</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="email-label-work"></span>Temp2</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link"><span class="email-label-travel"></span>Temp3</a></li>
-
-                    <li><input type="checkbox" name="check" onclick="onlyOne(this)"></li>
-                    <li><input type="checkbox" name="check" onclick="onlyOne(this)"></li>
-                    <li><input type="checkbox" name="check" onclick="onlyOne(this)"></li>
-                    <li><input type="checkbox" name="check" onclick="onlyOne(this)"></li>
+                    <li><label class="container">Dijkstra
+                        <input type="checkbox" name="check" onclick="selectAlgorithm(this, 'dijkstra')">
+                        <span class="checkmark"></span>
+                      </label></li>
+                      
+                      <li><label class="container"> A*
+                        <input type="checkbox" name="check" onclick="selectAlgorithm(this, 'a_star')">
+                        <span class="checkmark"></span>
+                      </label></li>
+                      
+                      <li><label class="container"> Temp
+                        <input type="checkbox" name="check" onclick="selectAlgorithm(this, 'temp')">
+                        <span class="checkmark"></span>
+                      </label></li>
+                      
+                      <li><label class="container"> Temp
+                        <input type="checkbox" name="check" onclick="selectAlgorithm(this, 'temp')">
+                        <span class="checkmark"></span>
+                      </label></li>
                 </ul>
             </div>
     </div>
-   
 </div>
 
 <div class = "gridArea"></div>
