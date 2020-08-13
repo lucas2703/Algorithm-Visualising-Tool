@@ -6,8 +6,9 @@ function selectAlgorithm(checkbox, algorithm) {
     console.log("algorithm selceted: ", selectedAlgorithm);
     var checkboxes = document.getElementsByName('check')
 
-    var grid_title = document.getElementById("layout");
-    //grid_title.innerHTML = "Pathfinding Algorithm: ", selectedAlgorithm;   
+    // update title
+    var grid_title_id = document.getElementById("grid_title_id");
+    grid_title_id.innerText = "Pathfinding Algorithm: " + selectedAlgorithm;   
 
     // uncheck all other boses
     checkboxes.forEach((item) => {

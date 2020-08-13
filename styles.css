@@ -19,9 +19,10 @@ a {
     height: 22px;
     font-size: 50px;
     color: pink;
-    position: absolute;
+    position: relative;
     top: 8px;
     padding: -40px;
+    left: 620px;    
 }
 
 .grid { 
