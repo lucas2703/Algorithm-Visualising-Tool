@@ -26,10 +26,20 @@ function resetGrid ()
         // get walls and store
         let wallTemp = document.getElementsByClassName('wall');
         
-        // iterate through object using forEach (Object.keys(wallTemp) gets keys in [ "", "", ""])
+        // iterate through walls object using forEach (Object.keys(wallTemp) gets keys in [ "", "", ""])
         Object.keys(wallTemp).forEach(function (){
             // object seemed to remove the element from the object, index 0 everytime worked
             wallTemp[0].classList.remove('wall');
+        })
+    }
+
+    // if there are walls to be re-added
+    if (Object.keys(deletedWalls).length != 0)
+    {
+        Object.keys(deletedWalls).forEach(function (i)
+        {
+            // re-implement the previously deleted walls into gridGraph
+            gridGraph[i] = deletedWalls[i];
         })
     }
 

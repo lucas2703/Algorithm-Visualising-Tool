@@ -11,6 +11,8 @@
 // global vars 
 var lastClicked, startPoint, endPoint = null;
 var isDown = false;
+// store walls to be deleted in var to re-input after RESET button is pressed
+var deletedWalls = {}
 
 // specify row and column for grid
 var grid = clickableGrid(26, 45, function(ele, row, col, cell) {
@@ -406,23 +408,21 @@ async function dijkstraSolve() {
 
     // account for any walls and set their classname
     var walls = document.getElementsByClassName('wall');
+
     for (let i = 0; i < walls.length; i++)
     {
         // find coords of the wall element
         let temp = convertElementToRowColumn(walls[i].id);
         console.log(temp);
 
-        // store walls to be deleted in var to re-input after RESET button is pressed
-        var deletedWalls = {}
-
-        deletedWalls[temp] = gridGraph[gridArray[temp[0]][temp[1]]];
+        // store deleted wall
+        deletedWalls[walls[i].id] = gridGraph[gridArray[temp[0]][temp[1]]];
 
         // set walls to empty to avoid considering when solving
         gridGraph[gridArray[temp[0]][temp[1]]] = {};
     }
 
-    console.log(deletedWalls);
-
+    //console.log(deletedWalls);
 
     // solve the distance using dijkstra.js and store the path
     var finalPath = Dijkstra(gridGraph, "start", "finish").path;

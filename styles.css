@@ -107,7 +107,7 @@ a {
 .reset-button {
     display: inline-block;
     border-radius: 4px;
-    background-color: #4CAF50;
+    background-color: red;
     border: none;
     color: #FFFFFF;
     text-align: center;
@@ -116,7 +116,7 @@ a {
     width: 120px;
     transition: all 0.5s;
     cursor: pointer;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-bottom: 25px;
 }
 
