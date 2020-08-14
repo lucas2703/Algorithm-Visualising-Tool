@@ -1,7 +1,9 @@
         /**************************** TO DO ********************************/
 
-        // make start and end tiles one-click - drag and drop into table? 
-        // implement visualisation for algorithm - step-by-step visualisation
+        // make START and END drag and drop
+        // implement visualisation for algorithm searching
+        // implement RESET button to reset the grid
+        // look into 'forEach' for iterating through arrays
 
         /*******************************************************************/
 
@@ -12,14 +14,14 @@ var isDown = false;
 
 // specify row and column for grid
 var grid = clickableGrid(26, 45, function(ele, row, col, cell) {
-    //console.log("clicked on element:", ele);
-    //console.log("clicked on row:", row);
-    //console.log("clicked on col:", col);
 
+    // 'wall' element is filled / unfilled
     if (isDown)
     {
-        // 'wall' element is filled
-        ele.className = 'wall';
+        if (ele.className != 'start' && ele.className != 'end')
+        {
+            ele.className = 'wall';
+        }
     }
 
     if (startPoint != null && endPoint == null)
@@ -96,7 +98,7 @@ function clickableGrid(rows, cols, callback) {
 var gridGraph = {};
 
 var gridRows = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var gridColumns = [00, 01, 02, 03, 04, 05, 06, 07, 08, 09   , 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 
+var gridColumns = [00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 
     35, 36, 37, 38, 39, 40, 41, 42, 43, 44];
 
     
@@ -224,8 +226,6 @@ for (let i = 0; i < gridRows.length; i++) // row
     }
 }
 
-console.log(gridGraph); 
-
 // set START and END - used in debug
 var startPoint = document.getElementById('15p');
 startPoint.className = 'start';
@@ -250,6 +250,12 @@ function convertElementToRowColumn (elementId)
 }
 
 async function dijkstraSolve() {
+
+    if (!selectedAlgorithm)
+    {
+        alert("Select an algorithm!");
+        return;
+    }
 
     // set START point in gridGraph array and finish point into its surrounding tiles 
     if (startPoint && endPoint)
@@ -403,16 +409,29 @@ async function dijkstraSolve() {
     for (let i = 0; i < walls.length; i++)
     {
         // find coords of the wall element
-        var temp = convertElementToRowColumn(walls[i].id);
+        let temp = convertElementToRowColumn(walls[i].id);
+        console.log(temp);
+
+        // store walls to be deleted in var to re-input after RESET button is pressed
+        var deletedWalls = {}
+
+        deletedWalls[temp] = gridGraph[gridArray[temp[0]][temp[1]]];
+
         // set walls to empty to avoid considering when solving
         gridGraph[gridArray[temp[0]][temp[1]]] = {};
     }
+
+    console.log(deletedWalls);
 
 
     // solve the distance using dijkstra.js and store the path
     var finalPath = Dijkstra(gridGraph, "start", "finish").path;
 
-    console.log(finalPath);
+    if (finalPath.length == 1)
+    {
+        alert('Walls blocking the solution!\nPlease reset and try again.');
+        return;
+    }
 
     // set the path (exlcuding START and END) tiles to .click to convert their colour
     for (let i = 1; i < finalPath.length - 1; i++)
@@ -421,8 +440,6 @@ async function dijkstraSolve() {
         routeTemp.className = 'route';
         await sleep(100);
     }
-
-    console.log(selectedAlgorithm);
 }
 
 // shamelessly stolen off stack overflow

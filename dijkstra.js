@@ -1,15 +1,3 @@
-const graph = 
-{
-    start: {A: 4, B: 2},
-    A: {C: 6, D: 1},
-    B: {A: 3, D: 7},
-    C: {finish: 2},
-    D: {C: 2, finish: 10},
-    finish: {}
-};
-
-//console.log(graph);
-
 // Function to find the lowest cost neighbouring node 
 const shortestNodeDistance = (distances, visited) => {
     // Var for shortest 
@@ -119,5 +107,3 @@ const Dijkstra = (graph, startNode, finishNode) =>
 
     return results;
 };
-
-console.log(Dijkstra(graph, "start", "finish"));
