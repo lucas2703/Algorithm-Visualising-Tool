@@ -13,7 +13,8 @@ a {
 
 /* 
 *  -- OWN STUFF --
-*/
+*/  
+
 /* GRID FORMATTING */
 .gridTitle {
     height: 10px;
@@ -32,11 +33,19 @@ a {
     left: 65px;
     top: 10px;
 }
+
+.grid td:hover
+{
+    background-color: lightgrey;
+    opacity: 15%;
+}
+
 .grid td {
     cursor: pointer;
     width: 30px; height: 30px;
     border: 1px solid #ede;
 }
+
 .grid td.wall {
     background-color:#ede;
 }

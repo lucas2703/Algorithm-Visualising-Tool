@@ -18,8 +18,9 @@ const shortestNodeDistance = (distances, visited) => {
     return shortest;
 };
 
+//const Dijkstra = function(graph, startNode, finishNode)
 const Dijkstra = (graph, startNode, finishNode) =>
-{
+{   
     // Hash object to track each nodes DISTANCES from start node
     var distances = {};
     // set highest val 'Infinity' so next (smaller) value is selected
@@ -43,19 +44,12 @@ const Dijkstra = (graph, startNode, finishNode) =>
     // for the nearest node:
     while (nearestNode)
     {
+        //document.getElementById(nearestNode).className = 'solving';
+
         // find the distance to the nearestNode
         let distanceToNode = distances[nearestNode];
         // child of nearestNode
         let childrenOfNode = graph[nearestNode];
-
-        /* Visualisation purposes */
-        //console.log(convertElementToRowColumn(nearestNode));
-        /*if (document.getElementById(nearestNode).className != 'start')
-        {
-            let solvingBlock = document.getElementById(nearestNode);
-            //solvingBlock.className = 'solving';
-            await sleep(20);
-        }*/
 
         // make sure the child node is not startNode
         for (let child in childrenOfNode)
@@ -81,7 +75,7 @@ const Dijkstra = (graph, startNode, finishNode) =>
                 }
             }
         }
-
+    
         // push the nearestNode into visitedNodes to avoid repeating on next iteration
         visitedNodes.push(nearestNode);
 

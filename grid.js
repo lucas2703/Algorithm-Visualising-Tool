@@ -2,7 +2,6 @@
 
         // make START and END drag and drop
         // implement visualisation for algorithm searching
-        // implement RESET button to reset the grid
         // look into 'forEach' for iterating through arrays
 
         /*******************************************************************/
@@ -10,40 +9,50 @@
 
 // global vars 
 var lastClicked, startPoint, endPoint = null;
+// is mouse clicked
 var isDown = false;
 // store walls to be deleted in var to re-input after RESET button is pressed
 var deletedWalls = {}
 
+var setStartPoint = false;
+
 // specify row and column for grid
-var grid = clickableGrid(26, 45, function(ele, row, col, cell) {
+var grid = clickableGrid(26, 45, function(ele, movetype) {
 
     // 'wall' element is filled / unfilled
     if (isDown)
     {
+        // don't overwrite start, end and route cells   
         if (ele.className != 'start' && ele.className != 'end')
         {
             ele.className = 'wall';
         }
     }
 
-    if (startPoint != null && endPoint == null)
+    // looking for click event 
+    if (movetype == "click")
     {
-        // get the ending point in format NUMBER + LETTER
-        endPoint = document.getElementsByClassName('wall')[0];
-        let endPointId = endPoint.id;
+        // set end point
+        if (startPoint != null && endPoint == null)
+        {
+            // get the ending point in format NUMBER + LETTER
+            endPoint = ele;
+            let endPointId = endPoint.id;
 
-        // end point has been clicked, set its class to 'end'
-        document.getElementById(endPointId).className = 'end';
-        
-    } else if (!startPoint) {
-        // get the starting point in format NUMBER + LETTER
-        startPoint = document.getElementsByClassName('wall')[0];
-        let startPointId = startPoint.id;
+            // end point has been clicked, set its class to 'end'
+            document.getElementById(endPointId).className = 'end';
+        } 
+        // set start point
+        else if (!startPoint) {
+            // get the starting point in format NUMBER + LETTER
+            startPoint = ele;
+            let startPointId = startPoint.id;
 
-        // start point has been clicked, set its class to 'start'
-        document.getElementById(startPointId).className = 'start';
+            // start point has been clicked, set its class to 'start'
+            document.getElementById(startPointId).className = 'start';
+        }
     }
-    else
+
     // stores the new box clicked element
     lastClicked = ele;
 });
@@ -68,28 +77,28 @@ function clickableGrid(rows, cols, callback) {
             cell.id = c + str1;
 
             // set text to blank so it's just an empty clickable box - here to be used later if need be
-            cell.innerHTML = "";
+            //cell.innerHTML = "";
 
             // event listeners to determine is mouse is up or down, storing in var isDown
             cell.addEventListener('mousedown', function() {
-                console.log("mouse down");
                 isDown = true;
             }, true);
             cell.addEventListener('mouseup', function() {
-                console.log("mouse up");
                 isDown = false;
             }, true);
 
-            if (isDown)
-            {
-
-            }
-            // add grid (table) click event
-            cell.addEventListener('mousemove', (function(ele, r, c, cell) {
+            cell.addEventListener('click', (function(ele) {
                 return function() {
-                callback(ele, r, c, cell);
+                callback(ele, "click");
                 }
-            })(cell, r, c, cell), true);
+            })(cell, "click"), true);
+
+            // add grid (table) click event for mouse drag
+            cell.addEventListener('mousemove', (function(ele) {
+                return function() {
+                callback(ele, "drag");
+                }
+            })(cell, "drag"), true);
         }
     }
 
@@ -229,10 +238,10 @@ for (let i = 0; i < gridRows.length; i++) // row
 }
 
 // set START and END - used in debug
-var startPoint = document.getElementById('15p');
+/*var startPoint = document.getElementById('15p');
 startPoint.className = 'start';
 var endPoint = document.getElementById('20p');
-endPoint.className = 'end';
+endPoint.className = 'end';*/
 
 function convertElementToRowColumn (elementId)
 {
@@ -413,19 +422,18 @@ async function dijkstraSolve() {
     {
         // find coords of the wall element
         let temp = convertElementToRowColumn(walls[i].id);
-        console.log(temp);
 
-        // store deleted wall
+        // store deleted wall (used in the Reset button)
         deletedWalls[walls[i].id] = gridGraph[gridArray[temp[0]][temp[1]]];
 
         // set walls to empty to avoid considering when solving
         gridGraph[gridArray[temp[0]][temp[1]]] = {};
     }
 
-    //console.log(deletedWalls);
-
     // solve the distance using dijkstra.js and store the path
     var finalPath = Dijkstra(gridGraph, "start", "finish").path;
+
+    console.log(Dijkstra(gridGraph, "start", "finish"));
 
     if (finalPath.length == 1)
     {
@@ -444,5 +452,7 @@ async function dijkstraSolve() {
 
 // shamelessly stolen off stack overflow
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+    return new Promise(
+      resolve => setTimeout(resolve, ms)
+    );
+  }  
