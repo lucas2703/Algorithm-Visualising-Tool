@@ -1,4 +1,2 @@
-Pathfinding Visualiser by Luke Bayliss
+Pathfinding Visualiser by Lucas2703
 
-
-TODO/temp

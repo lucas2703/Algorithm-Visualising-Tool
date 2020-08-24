@@ -73,8 +73,12 @@ const Dijkstra = (graph, startNode, finishNode) =>
                     // record path
                     route[child] = nearestNode;
                 }
-            }
+            }   
         }
+            
+        solving_path.push(nearestNode);
+
+        //setTimeout(visualiseDijkstra(nearestNode), 4000);
     
         // push the nearestNode into visitedNodes to avoid repeating on next iteration
         visitedNodes.push(nearestNode);

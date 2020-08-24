@@ -14,6 +14,8 @@ var isDown = false;
 // store walls to be deleted in var to re-input after RESET button is pressed
 var deletedWalls = {}
 
+var solving_path = [];
+
 var setStartPoint = false;
 
 // specify row and column for grid
@@ -23,7 +25,7 @@ var grid = clickableGrid(26, 45, function(ele, movetype) {
     if (isDown)
     {
         // don't overwrite start, end and route cells   
-        if (ele.className != 'start' && ele.className != 'end')
+        if (ele.className != 'start' && ele.className != 'end' && ele.className != 'route')
         {
             ele.className = 'wall';
         }
@@ -43,7 +45,7 @@ var grid = clickableGrid(26, 45, function(ele, movetype) {
             document.getElementById(endPointId).className = 'end';
 
             // update title
-            var grid_title_id = document.getElementById("grid_title_id");
+            let grid_title_id = document.getElementById("grid_title_id");
             grid_title_id.innerText = "Select an Algorithm";
         } 
         // set start point
@@ -56,8 +58,8 @@ var grid = clickableGrid(26, 45, function(ele, movetype) {
             document.getElementById(startPointId).className = 'start';
 
             // update title
-            var grid_title_id = document.getElementById("grid_title_id");
-            grid_title_id.innerText = "Click to set End tile";
+            let grid_title_id = document.getElementById("grid_title_id");
+            grid_title_id.innerText = "Click to Set END Tile";
         }
     }
 
@@ -268,7 +270,8 @@ function convertElementToRowColumn (elementId)
     return coords;
 }
 
-async function dijkstraSolve() {
+async function dijkstraSolve() 
+{
 
     if (!selectedAlgorithm)
     {
@@ -441,21 +444,44 @@ async function dijkstraSolve() {
     // solve the distance using dijkstra.js and store the path
     var finalPath = Dijkstra(gridGraph, "start", "finish").path;
 
-    console.log(Dijkstra(gridGraph, "start", "finish"));
-
     if (finalPath.length == 1)
     {
         alert('Walls blocking the solution!\nPlease reset and try again.');
         return;
     }
 
-    // set the path (exlcuding START and END) tiles to .click to convert their colour
-    for (let i = 1; i < finalPath.length - 1; i++)
+    for (let i = 0; i < solving_path.length; i++)
     {
-        let routeTemp = document.getElementById(finalPath[i]);
-        routeTemp.className = 'route';
-        await sleep(100);
-    }
+
+            if (solving_path[i] != startPoint.id && document.getElementById(solving_path[i]).className != 'wall')
+            {
+                visualiseDijkstra(solving_path[i]);
+                await sleep(50);
+
+                // if next to the finish tile
+                if ('finish' in gridGraph[solving_path[i]])
+                {
+                    // set the path (exlcuding START and END) tiles to .click to convert their colour
+                    for (let i = 1; i < finalPath.length - 1; i++)
+                    {
+                        let routeTemp = document.getElementById(finalPath[i]);
+                        routeTemp.className = 'route';
+                        await sleep(100);
+                    }
+                    return;
+                }
+            }
+
+    };
+}
+
+// pass through id's for visualisations e.g. 20k
+function visualiseDijkstra(cell)
+{
+    //console.log("sleeping for 100");
+    let visual_temp = document.getElementById(cell);
+    visual_temp.className = 'solving';
+    sleep(50);
 }
 
 // shamelessly stolen off stack overflow
@@ -463,4 +489,40 @@ function sleep(ms) {
     return new Promise(
       resolve => setTimeout(resolve, ms)
     );
-  }  
+}  
+
+
+  function generateMaze(maze)
+{
+    if (maze == "m_easy")
+    {
+        console.log("generating easy maze...");
+
+        // generating edge walls
+        for (let i = 0; i < gridRows.length; i++) // row
+        {
+            for (let j = 0; j < gridColumns.length; j++) // column
+            {
+                // top wall
+                if (i == 0 || j == 0 || i == gridRows.length - 1 || j == gridColumns.length - 1)
+                {
+                    let maze_wall = document.getElementById(gridArray[i][j]);
+                    maze_wall.className = 'wall';
+                }
+
+                // middle line
+                if (i == 12 && j != 1 && j != 43    ) 
+                {
+                    let maze_wall = document.getElementById(gridArray[i][j]);
+                    maze_wall.className = 'wall';
+                }
+            }
+        }
+        
+    }
+
+    else if (maze == "m_medium")
+    {
+        console.log("generating medium maze...");
+    }
+}

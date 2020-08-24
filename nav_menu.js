@@ -3,19 +3,38 @@ var selectedAlgorithm;
 // only select one checkbox in the nav-menu (used for choosing only ONE algorithm)
 function selectAlgorithm(checkbox, algorithm) {
     selectedAlgorithm = algorithm;
-    var checkboxes = document.getElementsByName('check')
+    let checkboxes = document.getElementsByName('check')
 
     // update title
-    var grid_title_id = document.getElementById("grid_title_id");
+    let grid_title_id = document.getElementById("grid_title_id");
     grid_title_id.innerText = "Pathfinding Algorithm: " + selectedAlgorithm;   
 
     // uncheck all other boses
-    checkboxes.forEach((item) => {
+    checkboxes.forEach((item) => 
+    {
         if (item !== checkbox) 
         {
             item.checked = false
         }  
     })
+}
+
+// only select one checkbox in the nav-menu (used for choosing only ONE algorithm)
+function selectMaze(checkbox, maze) {
+    // get list of maze checkboxes: m_check
+    var checkboxes = document.getElementsByName('m_check') 
+
+    // uncheck all other boses
+    checkboxes.forEach((item) => 
+    {
+        if (item !== checkbox) 
+        {
+            item.checked = false
+        }  
+    })
+
+    // call the generate maze function in grid.js
+    generateMaze(maze);
 }
 
 // reset button functionality to reset the wall class names to nothing
