@@ -41,6 +41,10 @@ var grid = clickableGrid(26, 45, function(ele, movetype) {
 
             // end point has been clicked, set its class to 'end'
             document.getElementById(endPointId).className = 'end';
+
+            // update title
+            var grid_title_id = document.getElementById("grid_title_id");
+            grid_title_id.innerText = "Select an Algorithm";
         } 
         // set start point
         else if (!startPoint) {
@@ -50,6 +54,10 @@ var grid = clickableGrid(26, 45, function(ele, movetype) {
 
             // start point has been clicked, set its class to 'start'
             document.getElementById(startPointId).className = 'start';
+
+            // update title
+            var grid_title_id = document.getElementById("grid_title_id");
+            grid_title_id.innerText = "Click to set End tile";
         }
     }
 
