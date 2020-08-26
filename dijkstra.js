@@ -76,6 +76,7 @@ const Dijkstra = (graph, startNode, finishNode) =>
             }   
         }
             
+        // store the nearestNode in the solving path once
         solving_path.push(nearestNode);
 
         //setTimeout(visualiseDijkstra(nearestNode), 4000);

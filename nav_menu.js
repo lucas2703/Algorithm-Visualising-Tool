@@ -40,6 +40,19 @@ function selectMaze(checkbox, maze) {
 // reset button functionality to reset the wall class names to nothing
 function resetGrid ()
 {
+    // remove START tile
+    if (document.getElementsByClassName('start'))
+    {
+        // get walls and store
+        let startTemp = document.getElementsByClassName('start');
+        startTemp[0].classList.remove('start');
+
+        // remove all traces of start tile location
+        delete gridGraph["start"];
+        startPoint = null;
+    }
+
+    // remove walls 
     if (document.getElementsByClassName('wall'))
     {
         // get walls and store
@@ -59,9 +72,11 @@ function resetGrid ()
         {
             // re-implement the previously deleted walls into gridGraph
             gridGraph[i] = deletedWalls[i];
+            
         })
     }
 
+    // remove route cells
     if (document.getElementsByClassName('route'))
     {
         // get route and store
@@ -71,5 +86,19 @@ function resetGrid ()
             // object seemed to remove the element from the object, index 0 everytime worked
             routeTemp[0].classList.remove('route');
         })
+    }
+
+    // remove solving cells
+    if (document.getElementsByClassName('solving'))
+    {
+        // get route and store
+        let solvingTemp = document.getElementsByClassName('solving');
+        
+        Object.keys(solvingTemp).forEach(function (){
+            // object seemed to remove the element from the object, index 0 everytime worked
+            solvingTemp[0].classList.remove('solving');
+        })
+
+        solving_path = [];
     }
 }

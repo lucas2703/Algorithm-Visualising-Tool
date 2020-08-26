@@ -13,10 +13,9 @@ var lastClicked, startPoint, endPoint = null;
 var isDown = false;
 // store walls to be deleted in var to re-input after RESET button is pressed
 var deletedWalls = {}
-
+// empty array for the solving path - need to store path to RESET on user input
 var solving_path = [];
-
-var setStartPoint = false;
+// store START point coord direction and weights
 
 // specify row and column for grid
 var grid = clickableGrid(26, 45, function(ele, movetype) {
@@ -478,7 +477,6 @@ async function dijkstraSolve()
 // pass through id's for visualisations e.g. 20k
 function visualiseDijkstra(cell)
 {
-    //console.log("sleeping for 100");
     let visual_temp = document.getElementById(cell);
     visual_temp.className = 'solving';
     sleep(50);
