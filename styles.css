@@ -15,6 +15,17 @@ a {
 *  -- OWN STUFF --
 */  
 
+/* ANIMATIONS */
+@keyframes solving_animation {
+    from {background-color: orange;}
+    to {background-color: lightgrey;}
+}
+
+@keyframes route_animation {
+    from {background-color: lightgrey;}
+    to {background-color: yellow;}
+}
+
 /* GRID FORMATTING */
 .gridTitle {
     height: 10px;
@@ -47,25 +58,29 @@ a {
 }
 
 .grid td.wall {
-    background-color:#ede;
+    background-color: darkblue;
 }
 
 .grid td.start {
-    background-color: #80dfff;
+    background-color: lightgreen;
     font-size: 7pt;
     text-align: center;
 }
 
 .grid td.solving {
-    background-color: lightsalmon;
+    background-color: lightgrey;
+    animation-name: solving_animation;
+    animation-duration: 1s;
 }
 
 .grid td.route {
-    background-color: violet;
+    background-color: yellow;
+    animation-name: route_animation;
+    animation-duration: 1s;
 }
 
 .grid td.end {
-    background-color: black;
+    background-color: red;
     font-size: 10pt;
     text-align: center;
 }
