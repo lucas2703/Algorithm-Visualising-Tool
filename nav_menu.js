@@ -52,6 +52,37 @@ function resetGrid ()
         startPoint = null;
     }
 
+    // remove END tile
+    if (document.getElementsByClassName('end'))
+    {
+        // get walls and store
+        let endTemp = document.getElementsByClassName('end');
+        endTemp[0].classList.remove('end');
+
+        // remove all traces of start tile location
+        if (endPointCoords[0] + 1 <= gridRows.length - 1)
+        {
+            delete gridGraph[gridArray[endPointCoords[0] + 1][endPointCoords[1]]]["finish"];
+        }
+
+        if ([endPointCoords[1] + 1] <= gridColumns.length - 1)
+        {
+            delete gridGraph[gridArray[endPointCoords[0]][endPointCoords[1] + 1]]["finish"];
+        }
+
+        if (endPointCoords[0] - 1 >= 0)
+        {
+            delete gridGraph[gridArray[endPointCoords[0] - 1][endPointCoords[1]]]["finish"];
+        }
+
+        if (endPointCoords[1] - 1 >= 0)
+        {
+            delete gridGraph[gridArray[endPointCoords[0]][endPointCoords[1] - 1]]["finish"];
+        } 
+
+        endPoint = null;
+    }
+
     // remove walls 
     if (document.getElementsByClassName('wall'))
     {
