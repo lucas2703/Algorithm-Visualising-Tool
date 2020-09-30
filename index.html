@@ -47,16 +47,8 @@
                     </label></li>
 
               <li class="pure-menu-heading">Mazes</li>
-                    <li><label class="container">Maze 1 (easy)
-                    <input type="checkbox" name="m_check" onclick="selectMaze(this, 'm_easy')">
-                    <span class="checkmark"></span>
-                    </label></li>
-
-                    <li><label class="container">Maze 2 (medium)
-                    <input type="checkbox" name="m_check" onclick="selectMaze(this, 'm_medium')">
-                    <span class="checkmark"></span>
-                    </label></li>
-                      
+                    <button id="easy_maze" class="easy-maze" style="vertical-align:middle" onclick="selectMaze(this, 'm_easy')"><span>Easy Maze</span></button>
+                    <button id="medium_maze" class="medium-maze" style="vertical-align:middle" onclick="selectMaze(this, 'm_medium')"><span>Medium Maze</span></button>
                 </ul>
             </div>
     </div>

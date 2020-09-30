@@ -41,7 +41,7 @@ function selectMaze(checkbox, maze) {
 function resetGrid ()
 {
     // remove START tile
-    if (document.getElementsByClassName('start'))
+    if (document.getElementsByClassName('start').length != 0)
     {
         // get walls and store
         let startTemp = document.getElementsByClassName('start');
@@ -53,7 +53,7 @@ function resetGrid ()
     }
 
     // remove END tile
-    if (document.getElementsByClassName('end'))
+    if (document.getElementsByClassName('end').length != 0)
     {
         // get walls and store
         let endTemp = document.getElementsByClassName('end');

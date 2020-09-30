@@ -26,6 +26,12 @@ a {
     to {background-color: yellow;}
 }
 
+@keyframes generate_maze_animation {
+    0% {background-color: white}
+    50% {background-color: green}
+    100% {background-color: white}
+}
+
 /* GRID FORMATTING */
 .gridTitle {
     height: 10px;
@@ -238,6 +244,87 @@ a {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+/*
+*   MAZE BUTTONS
+*
+*/
+.easy-maze {
+    position: relative;
+    background-color: #008CBA;
+    border: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    padding: 15.5px;
+    width: 130px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 9px;
+    margin-bottom: 10px;
+}   
+
+.easy-maze:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.easy-maze:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.medium-maze {
+    position: relative;
+    background-color: #008CBA;
+    border: none;
+    font-size: 18px;
+    color: #FFFFFF;
+    padding: 15.5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 130px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 9px;
+    margin-bottom: 10px;
+}   
+
+.medium-maze:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.medium-maze:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
 
 /*
  * -- HELPER STYLES --

@@ -1,8 +1,6 @@
         /**************************** TO DO ********************************/
 
-        // make START and END drag and drop
-        // implement visualisation for algorithm searching
-        // look into 'forEach' for iterating through arrays
+        
 
         /*******************************************************************/
 
@@ -490,7 +488,7 @@ function sleep(ms) {
 }  
 
 
-  function generateMaze(maze)
+function generateMaze(maze)
 {
     if (maze == "m_easy")
     {
@@ -509,7 +507,7 @@ function sleep(ms) {
                 }
 
                 // middle line
-                if (i == 12 && j != 1 && j != 43    ) 
+                if (i == 12 && j != 1 && j != 43 && j != 30 && j != 29 && j != 28 && j != 6 && j != 7) 
                 {
                     let maze_wall = document.getElementById(gridArray[i][j]);
                     maze_wall.className = 'wall';
