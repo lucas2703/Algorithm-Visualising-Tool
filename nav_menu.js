@@ -15,23 +15,12 @@ function selectAlgorithm(checkbox, algorithm) {
         if (item !== checkbox) 
         {
             item.checked = false
-        }  
+        }   
     })
 }
 
 // only select one checkbox in the nav-menu (used for choosing only ONE algorithm)
-function selectMaze(checkbox, maze) {
-    // get list of maze checkboxes: m_check
-    var checkboxes = document.getElementsByName('m_check') 
-
-    // uncheck all other boses
-    checkboxes.forEach((item) => 
-    {
-        if (item !== checkbox) 
-        {
-            item.checked = false
-        }  
-    })
+function selectMaze(maze) {
 
     // call the generate maze function in grid.js
     generateMaze(maze);

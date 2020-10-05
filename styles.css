@@ -40,7 +40,7 @@ a {
     position: absolute;
     top: 0px;
     padding: -40px;
-    left: 700px;    
+    left: 760px;    
 }
 
 .grid { 
@@ -253,9 +253,11 @@ a {
     position: relative;
     background-color: #008CBA;
     border: none;
-    font-size: 20px;
+    font-size: 22px;
     color: #FFFFFF;
     padding: 15.5px;
+    padding-left: 5px;
+    padding-right: 5px;
     width: 130px;
     text-align: center;
     transition-duration: 0.4s;
@@ -276,14 +278,15 @@ a {
     margin-left: -20px !important;
     margin-top: -120%;
     opacity: 0;
-    transition: all 0.8s
+    transition: all 0.8s;
+    background-color: white;
 }
 
 .easy-maze:active:after {
     padding: 0;
     margin: 0;
     opacity: 1;
-    transition: 0s
+    transition: 0s;
 }
 
 .medium-maze {
@@ -324,6 +327,46 @@ a {
     opacity: 1;
     transition: 0s
 }
+
+.large-maze {
+    position: relative;
+    background-color: #008CBA;
+    border: none;
+    font-size: 22px;
+    color: #FFFFFF;
+    padding: 15.5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 130px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 9px;
+    margin-bottom: 10px;
+}   
+
+.large-maze:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.large-maze:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
 
 
 /*

@@ -1,6 +1,6 @@
         /**************************** TO DO ********************************/
-
-        
+        // implement a star algorithm
+        // fix grid title
 
         /*******************************************************************/
 
@@ -43,7 +43,11 @@ var grid = clickableGrid(26, 45, function(ele, movetype) {
 
             // update title
             let grid_title_id = document.getElementById("grid_title_id");
-            grid_title_id.innerText = "Select an Algorithm";
+            // if an algorithm hasn't been selected
+            if (!selectedAlgorithm)
+            {
+                grid_title_id.innerText = "Select an Algorithm";
+            }
         } 
         // set start point
         else if (!startPoint) {
@@ -520,5 +524,10 @@ function generateMaze(maze)
     else if (maze == "m_medium")
     {
         console.log("generating medium maze...");
+    }
+
+    else if (maze == 'm_large')
+    {
+        console.log('generating large maze ...');
     }
 }
