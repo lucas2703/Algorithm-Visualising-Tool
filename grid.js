@@ -5,7 +5,6 @@
 
         /*******************************************************************/
 
-
 // global vars 
 var lastClicked, startPoint, endPoint = null;
 // is mouse clicked
@@ -15,8 +14,9 @@ var deletedWalls = {}
 // empty array for the solving path - need to store path to RESET on user input
 var solving_path = [];
 // store START point coord direction and weights
+var dfs_solving_path = [];
 
-// specify row and column for grid
+// specify row and column size, along with function to determine mouse input for grid
 var grid = clickableGrid(26, 45, function(ele, movetype) {
 
     // 'wall' element is filled / unfilled
@@ -443,8 +443,30 @@ async function dijkstraSolve()
         gridGraph[gridArray[temp[0]][temp[1]]] = {};
     }
 
+    if (selectedAlgorithm == 'Dijkstra')
+    {
+        // solve the distance using dijkstra.js and store the path
+        var finalPath = Dijkstra(gridGraph, "start", "finish").path;
+        console.log('dijkstra');
+        console.log(solving_path);
+    }
+    else if (selectedAlgorithm == 'A*')
+    {
+        console.log('Solving with A*');
+    }
+    else if (selectedAlgorithm == 'DFS')
+    {
+        var finalPath = DFS(gridGraph, "start", "finish");
+        solving_path = dfs_solving_path;
+        console.log(solving_path);
+    }
+    else if (selectedAlgorithm == 'BFS')
+    {
+        console.log("solving with BFS");
+    }
+
     // solve the distance using dijkstra.js and store the path
-    var finalPath = Dijkstra(gridGraph, "start", "finish").path;
+    //var finalPath = Dijkstra(gridGraph, "start", "finish").path;
 
     if (finalPath.length == 1)
     {
@@ -454,25 +476,27 @@ async function dijkstraSolve()
 
     for (let i = 0; i < solving_path.length; i++)
     {
+        console.log("solving path");
+        //console.log(solving_path); // does it correctly
 
-            if (solving_path[i] != startPoint.id && document.getElementById(solving_path[i]).className != 'wall')
+        if (solving_path[i] != startPoint.id && document.getElementById(solving_path[i]).className != 'wall')
+        {
+            visualiseDijkstra(solving_path[i]);
+            await sleep(50);
+
+            // if next to the finish tile
+            if ('finish' in gridGraph[solving_path[i]])
             {
-                visualiseDijkstra(solving_path[i]);
-                await sleep(50);
-
-                // if next to the finish tile
-                if ('finish' in gridGraph[solving_path[i]])
+                // set the path (exlcuding START and END) tiles to .click to convert their colour
+                for (let i = 1; i < finalPath.length - 1; i++)
                 {
-                    // set the path (exlcuding START and END) tiles to .click to convert their colour
-                    for (let i = 1; i < finalPath.length - 1; i++)
-                    {
-                        let routeTemp = document.getElementById(finalPath[i]);
-                        routeTemp.className = 'route';
-                        await sleep(100);
-                    }
-                    return;
+                    let routeTemp = document.getElementById(finalPath[i]);
+                    routeTemp.className = 'route';
+                    await sleep(100);
                 }
+                return;
             }
+        }
 
     };
 }

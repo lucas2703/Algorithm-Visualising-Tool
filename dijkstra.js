@@ -104,5 +104,7 @@ const Dijkstra = (graph, startNode, finishNode) =>
         path: optimalPath
     }
 
+    console.log(results.path);
+
     return results;
 };
