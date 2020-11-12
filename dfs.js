@@ -1,19 +1,15 @@
-const test_graph = {
-    start: {A: 1, B: 1},
-    A: {C: 1, D: 1},
-    B: {A: 1, D: 1},
-    C: {D: 1, finish: 1},
-    D: {finish: 1},
-    finish: {}
-};
 // Depth-First Search for shortest path
 const DFS = (graph, startNode, finishNode) => {
     var stack = [startNode];
     var parent = {};
     var seen = [startNode]
-    while(Array.isArray(stack) && stack.length)
+    while(stack.length)
     {
         vertex = stack.pop();
+        if (vertex == finishNode)
+        {
+            break;
+        }
         //console.log(vertex); //start
         for (var u in graph[vertex])
         {

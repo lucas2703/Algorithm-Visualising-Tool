@@ -7,7 +7,18 @@ function selectAlgorithm(checkbox, algorithm) {
 
     // update title
     let grid_title_id = document.getElementById("grid_title_id");
-    grid_title_id.innerText = "Pathfinding Algorithm: " + selectedAlgorithm;   
+    if (selectedAlgorithm == 'DFS')
+    {
+        grid_title_id.innerText = 'Pathfinding Algorithm: Depth-First Search'
+    }
+    else if (selectedAlgorithm == 'BFS')
+    {
+        grid_title_id.innerText = 'Pathfinding Algorithm: Breadth-First Search'
+    }
+    else
+    {
+        grid_title_id.innerText = "Pathfinding Algorithm: " + selectedAlgorithm;   
+    }
 
     // uncheck all other boses
     checkboxes.forEach((item) => 
@@ -120,5 +131,6 @@ function resetGrid ()
         })
 
         solving_path = [];
+        dfs_solving_path = [];
     }
 }

@@ -15,6 +15,8 @@ var deletedWalls = {}
 var solving_path = [];
 // store START point coord direction and weights
 var dfs_solving_path = [];
+// BFS path
+var bfs_solving_path = [];
 
 // specify row and column size, along with function to determine mouse input for grid
 var grid = clickableGrid(26, 45, function(ele, movetype) {
@@ -443,6 +445,7 @@ async function dijkstraSolve()
         gridGraph[gridArray[temp[0]][temp[1]]] = {};
     }
 
+    // needs fixing
     if (selectedAlgorithm == 'Dijkstra')
     {
         // solve the distance using dijkstra.js and store the path
@@ -462,6 +465,8 @@ async function dijkstraSolve()
     }
     else if (selectedAlgorithm == 'BFS')
     {
+        var finalPath = BFS(gridGraph, 'start', 'finish');
+        solving_path = bfs_solving_path;
         console.log("solving with BFS");
     }
 
@@ -476,7 +481,6 @@ async function dijkstraSolve()
 
     for (let i = 0; i < solving_path.length; i++)
     {
-        console.log("solving path");
         //console.log(solving_path); // does it correctly
 
         if (solving_path[i] != startPoint.id && document.getElementById(solving_path[i]).className != 'wall')
